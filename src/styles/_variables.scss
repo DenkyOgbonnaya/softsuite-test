@@ -1,0 +1,67 @@
+$white: #FFFFFF;
+
+$colors: (
+  secondary-color-0-tint: #4BAA79,
+  primary-0-tint: #2D416F,
+  primary-60-tint: #ABB3C5,
+  primary-40-tint: #818DA9,
+  white: #FFFFFF,
+  gray: #7E7E7E,
+  light-red: #FCEEEE,
+  light-green: #93CCAF,
+  danger: #E05453,
+  surface-green: #F3FFF1,
+  border: #E5E5E5,
+  placeholder: #818DA9,
+  background-color: $white
+);
+
+$fontFamily: (
+  body: --font-gilroy,
+  heading: --font-gilroy,
+  display: --font-gilroy,
+  link: --font-poppins,
+);
+$fontSize: (
+  xs: 0.75rem,
+  sm: 0.875rem,
+  base: 1rem,
+  lg: 1.125rem,
+  xl: 1.25rem,
+  2xl: 1.5rem,
+  3xl: 1.875rem,
+  4xl: 2.25rem,
+  5xl: 3rem,
+  6xl: 3.75rem,
+  7xl: 4.5rem,
+  8xl: 6rem,
+  9xl: 8rem,
+);
+
+$fontWeight: (
+  light: 300,
+  normal: 400,
+  medium: 500,
+  semibold: 600,
+  bold: 700,
+);
+$borderRadius: (
+  sm: 0.25rem,
+);
+$screens: (
+  xs: 475px,
+  sm: 640px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px,
+  2xl: 1536px,
+);
+
+$opacity: (
+  "0": 0,
+  "20": 0.2,
+  "40": 0.4,
+  "60": 0.6,
+  "80": 0.8,
+  "100": 1,
+);

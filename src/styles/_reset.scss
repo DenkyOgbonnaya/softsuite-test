@@ -1,0 +1,32 @@
+@use './mixins';
+@use './helpers';
+
+*,
+*:before,
+*:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  line-height: 1.5;
+  -webkit-tap-highlight-color: transparent; // to remove the bluish background on click
+}
+
+html {
+  font-size: 1rem;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: font-family(body), sans-serif;
+  font-weight: font-weight(normal);
+  background-color: color(background-color);
+  // color: color(primary-0-tint);
+}
+
+img {
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+}

@@ -1,0 +1,25 @@
+@use "./variables" as *;
+
+@function color($color-name) {
+  @return map-get($colors, $color-name);
+}
+
+@function font-size($font-size-name) {
+  @return map-get($fontSize, $font-size-name);
+}
+
+@function font-weight($font-weight-name) {
+  @return map-get($fontWeight, $font-weight-name);
+}
+
+@function font-family($font-family-name) {
+  @return map-get($fontFamily, $font-family-name);
+}
+
+@function border-radius($border-radius-name) {
+  @return map-get($borderRadius, border-radius-name);
+}
+
+@function screen($breakpoint-name) {
+  @return map-get($screens, $breakpoint-name);
+}
