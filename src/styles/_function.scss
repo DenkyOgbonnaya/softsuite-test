@@ -7,7 +7,9 @@
 @function font-size($font-size-name) {
   @return map-get($fontSize, $font-size-name);
 }
-
+@function spacing($spacing-name) {
+  @return map-get($spacing, $spacing-name);
+}
 @function font-weight($font-weight-name) {
   @return map-get($fontWeight, $font-weight-name);
 }
@@ -22,6 +24,7 @@
 @function opacity($opacity-name) {
   @return map-get($opacity, $opacity-name);
 }
+
 @function screen($breakpoint-name) {
   @return map-get($screens, $breakpoint-name);
 }

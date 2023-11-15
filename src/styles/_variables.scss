@@ -11,7 +11,7 @@ $colors: (
   light-green: #93CCAF,
   danger: #E05453,
   surface-green: #F3FFF1,
-  border: #E5E5E5,
+  ss-border: #E5E5E5,
   placeholder: #818DA9,
   background-color: $white
 );
@@ -53,11 +53,11 @@ $spacing: (
   9xl: 8rem,
 );
 $fontWeight: (
-  light: 300,
-  normal: 400,
-  medium: 500,
-  semibold: 600,
-  bold: 700,
+  ss-light: 300,
+  ss-normal: 400,
+  ss-medium: 500,
+  ss-semibold: 600,
+  ss-bold: 700,
 );
 $borderRadius: (
   sm: 0.25rem,
