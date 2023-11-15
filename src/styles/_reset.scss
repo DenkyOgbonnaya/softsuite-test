@@ -18,9 +18,9 @@ html {
 
 body {
   font-family: font-family(body), sans-serif;
-  font-weight: font-weight(normal);
+  font-weight: font-weight(--normal);
   background-color: color(background-color);
-  // color: color(primary-0-tint);
+  color: color(primary-0-tint);
 }
 
 img {
@@ -29,4 +29,10 @@ img {
 
 a {
   text-decoration: none;
+}
+
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0;
+    -webkit-appearance: none;
 }

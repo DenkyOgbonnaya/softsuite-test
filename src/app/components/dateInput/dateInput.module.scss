@@ -1,0 +1,54 @@
+@use "@/styles" as *;
+
+.input {
+  padding: 1rem;
+  border-radius: border-radius(sm);
+  border: 1px solid color(ss-border);
+  background-color: color(ss-white);
+  font-size: font-size(base);
+  font-family: font-family(body);
+  color: color(primary-40-tint);
+  font-weight: font-weight(ss-normal);
+  outline: none;
+  height: 1.5rem;
+  &::placeholder {
+    color: color(placeholder);
+  }
+  &:disabled {
+    opacity: opacity(60);
+  }
+  &:focus {
+    border: 1px solid color(primary-40-tint);
+  }
+}
+.error {
+  @extend .input;
+  border: 1px solid color(danger);
+}
+.label {
+  display: flex;
+  flex-direction: column;
+  gap: calc(spacing(xs) - 0.25rem);
+  font-size: font-size(sm);
+  font-family: font-family(body);
+  color: color(primary-40-tint);
+  font-weight: font-weight(ss-normal);
+  position: relative;
+}
+.dateIcon {
+  position: absolute;
+  right: 10px;
+  bottom: 40px;
+  pointer-events: none;
+}
+.errorWrap {
+  background-color: color(light-red);
+  padding: 0.375rem 0.5rem;
+  border-radius: border-radius(sm);
+}
+.errorLabel {
+  font-size: font-size(xs);
+  font-family: font-family(body);
+  color: color(danger);
+  font-weight: font-weight(ss-medium);
+}
