@@ -5,8 +5,8 @@ $colors: (
   primary-0-tint: #2D416F,
   primary-60-tint: #ABB3C5,
   primary-40-tint: #818DA9,
-  white: #FFFFFF,
-  gray: #7E7E7E,
+  ss-white: #FFFFFF,
+  ss-gray: #7E7E7E,
   light-red: #FCEEEE,
   light-green: #93CCAF,
   danger: #E05453,
@@ -37,7 +37,21 @@ $fontSize: (
   8xl: 6rem,
   9xl: 8rem,
 );
-
+$spacing: (
+  xs: 0.75rem,
+  sm: 0.875rem,
+  base: 1rem,
+  lg: 1.125rem,
+  xl: 1.25rem,
+  2xl: 1.5rem,
+  3xl: 1.875rem,
+  4xl: 2.25rem,
+  5xl: 3rem,
+  6xl: 3.75rem,
+  7xl: 4.5rem,
+  8xl: 6rem,
+  9xl: 8rem,
+);
 $fontWeight: (
   light: 300,
   normal: 400,
@@ -58,10 +72,10 @@ $screens: (
 );
 
 $opacity: (
-  "0": 0,
-  "20": 0.2,
-  "40": 0.4,
-  "60": 0.6,
-  "80": 0.8,
-  "100": 1,
+  0: 0,
+  20: 0.2,
+  40: 0.4,
+  60: 0.6,
+  80: 0.8,
+  100: 1,
 );

@@ -1,0 +1,51 @@
+@use "@/styles" as *;
+
+.base {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  border-radius: border-radius(sm);
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: font-family(body);
+  gap: spacing(sm);
+  cursor: pointer;
+}
+
+.primary {
+  background-color: color(secondary-color-0-tint);
+  color: color(ss-white);
+  &:hover {
+    opacity: opacity(80);
+  }
+  &:disabled {
+    opacity: opacity(40);
+    cursor:not-allowed
+  }
+}
+.outline {
+  color: color(secondary-color-0-tint);
+  border: 2px solid color(secondary-color-0-tint);
+  &:hover {
+    opacity: opacity(80);
+  }
+}
+.link {
+  text-decoration: underline;
+  &:hover {
+    opacity: opacity(80);
+  }
+}
+.icon {
+  padding: 0rem;
+}
+.small {
+  font-size: font-size(sm);
+  font-weight: font-weight(normal);
+}
+.medium {
+  font-size: font-size(sm);
+  font-weight: font-weight(bold);
+}

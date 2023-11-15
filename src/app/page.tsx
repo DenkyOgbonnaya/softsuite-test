@@ -1,10 +1,12 @@
 import Image from 'next/image'
 import styles from './page.module.scss'
+import { Button } from './components'
 
 export default function Home() {
   return (
     <main className={styles.main}>
-      <p className={styles.p}>Hello word</p>
+      <Button  size="medium" intent="primary">Hello World</Button>
+      <Button isLoading  size="medium" intent="primary">Hello World</Button>
     </main>
   )
 }

@@ -17,9 +17,11 @@
 }
 
 @function border-radius($border-radius-name) {
-  @return map-get($borderRadius, border-radius-name);
+  @return map-get($borderRadius, $border-radius-name);
 }
-
+@function opacity($opacity-name) {
+  @return map-get($opacity, $opacity-name);
+}
 @function screen($breakpoint-name) {
   @return map-get($screens, $breakpoint-name);
 }
