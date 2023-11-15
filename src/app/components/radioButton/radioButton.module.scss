@@ -1,0 +1,70 @@
+@use "@/styles" as *;
+
+.container {
+  display: block;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-left: 1.5rem;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-size: font-size(base);
+  font-family: font-family(body);
+  font-weight: font-weight(ss-medium);
+  color: color(primary-0-tint);
+  letter-spacing: -0.03rem;
+}
+
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+
+.checkmark {
+  position: absolute;
+  top: 4;
+  left: 0;
+  height: 1rem;
+  width: 1rem;
+  background-color: color(ss-white);
+  border-radius: 50%;
+  border: 1px solid color(ss-border)
+}
+
+
+.container:hover input ~ .checkmark {
+  opacity: opacity(80);
+}
+
+
+.container input:checked ~ .checkmark {
+  border: 1px solid color(secondary-color-0-tint)
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+
+.container .checkmark:after {
+  top: 2px;
+  left: 2px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: color(secondary-color-0-tint);
+}

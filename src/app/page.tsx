@@ -1,6 +1,12 @@
 import Image from "next/image";
 import styles from "./page.module.scss";
-import { Button, DateInput, Input } from "./components";
+import {
+  Button,
+  DateInput,
+  Input,
+  RadioButton,
+  SelectInput,
+} from "./components";
 
 export default function Home() {
   return (
@@ -26,6 +32,15 @@ export default function Home() {
         error={true}
         errorMessage="Hello world"
       />
+      <SelectInput name="selec" label="Select one" error>
+        <option value="hell">Hello man</option>
+        <option value="why">Why man</option>
+      </SelectInput>
+
+      <div>
+        <RadioButton label="Hello" name="hello" value="yes" />
+        <RadioButton label="World" name="hello" value="No" />
+      </div>
     </main>
   );
 }
