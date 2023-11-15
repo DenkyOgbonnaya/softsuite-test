@@ -1,0 +1,25 @@
+@use "@/styles" as *;
+
+.searchBar {
+  display: flex;
+  align-items: center;
+}
+.input {
+    @include input;
+    height: 2.5rem;
+    border-radius: none;
+    border-top-left-radius:  0.3rem;
+    border-bottom-left-radius: 0.3rem;
+}
+.searchIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: color(secondary-color-0-tint);
+  border-radius: 0rem 0.3rem 0.3rem 0rem;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}

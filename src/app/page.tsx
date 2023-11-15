@@ -1,10 +1,11 @@
-import Image from "next/image";
+'use client'
 import styles from "./page.module.scss";
 import {
   Button,
   DateInput,
   Input,
   RadioButton,
+  SearchBar,
   SelectInput,
   Switch,
 } from "./components";
@@ -44,6 +45,7 @@ export default function Home() {
       </div>
 
       <Switch name="hello" label="Active" />
+      <SearchBar placeholder="Search something..." />
     </main>
   );
 }

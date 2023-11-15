@@ -23,3 +23,25 @@
   width: 100%;
   max-width: 1200px;
 }
+
+@mixin input {
+  padding: 1rem;
+  border-radius: border-radius(sm);
+  border: 1px solid color(ss-border);
+  background-color: color(ss-white);
+  font-size: font-size(base);
+  font-family: font-family(body);
+  color: color(primary-40-tint);
+  font-weight: font-weight(ss-normal);
+  outline: none;
+  height: 1.5rem;
+  &::placeholder {
+    color: color(placeholder);
+  }
+  &:disabled {
+    opacity: opacity(60);
+  }
+  &:focus {
+    border: 1px solid color(primary-40-tint);
+  }
+}
