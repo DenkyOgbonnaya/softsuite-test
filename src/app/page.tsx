@@ -6,6 +6,7 @@ import {
   Input,
   RadioButton,
   SelectInput,
+  Switch,
 } from "./components";
 
 export default function Home() {
@@ -41,6 +42,8 @@ export default function Home() {
         <RadioButton label="Hello" name="hello" value="yes" />
         <RadioButton label="World" name="hello" value="No" />
       </div>
+
+      <Switch name="hello" label="Active" />
     </main>
   );
 }
