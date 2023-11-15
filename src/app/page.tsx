@@ -8,7 +8,7 @@ import {
   SearchBar,
   SelectInput,
   Switch,
-} from "./components";
+} from "@/components";
 
 export default function Home() {
   return (
