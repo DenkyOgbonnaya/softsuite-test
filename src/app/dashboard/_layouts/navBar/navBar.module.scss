@@ -1,0 +1,33 @@
+@use "@/styles" as *;
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 6.063rem;
+  padding: 1.25rem 1rem;
+  background-color: $white;
+  position: sticky;
+  position: -webkit-sticky;
+}
+.hstack {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+}
+.vstack {
+  display: flex;
+  flex-direction: column;
+}
+.label {
+  font-family: font-family(body);
+  font-size: font-size(sm);
+  font-weight: font-weight(ss-medium);
+  color: color(primary-0-tint);
+}
+.option {
+  font-family: font-family(body);
+  font-size: font-size(base);
+  font-weight: font-weight(ss-bold);
+  color: color(primary-0-tint);
+}

@@ -1,0 +1,9 @@
+@use "@/styles" as *;
+.container {
+  background-color: color(surface);
+  min-height: 100%;
+}
+.main {
+    padding: 4rem;
+    flex: 1;
+}

@@ -1,0 +1,8 @@
+@use "@/styles" as *;
+
+.sidebar {
+  display: flex;
+  padding: spacing(base);
+  flex-direction: column;
+  gap: 2rem // spacing(base);
+}

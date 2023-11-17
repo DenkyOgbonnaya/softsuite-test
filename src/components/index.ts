@@ -5,3 +5,4 @@ export { default as SelectInput } from "./selectInput";
 export { default as RadioButton } from "./radioButton";
 export {default as Switch} from "./switch"
 export {default as SearchBar} from "./searchBar"
+export {default as DropDown} from "./dropDown"

@@ -1,0 +1,31 @@
+@use "@/styles" as *;
+.container {
+  display: flex;
+  gap: calc(spacing(base) * 2);
+  align-items: center;
+  background-color: color(surface);
+  padding: 0.5rem;
+  border-radius: border-radius(sm);
+}
+.hstack {
+  display: flex;
+  gap: spacing(base);
+  align-items: center;
+}
+.vstack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.06rem
+}
+.label {
+  font-family: font-family(body);
+  font-size: font-size(lg);
+  font-weight: font-weight(ss-semibold);
+  color: color(primary-0-tint);
+}
+.option {
+  font-family: font-family(body);
+  font-size: font-size(base);
+  font-weight: font-weight(ss-normal);
+  color: color(primary-40-tint);
+}

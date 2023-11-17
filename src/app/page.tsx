@@ -1,4 +1,5 @@
 'use client'
+import Dropdown from "@/components/dropDown";
 import styles from "./page.module.scss";
 import {
   Button,
@@ -46,6 +47,12 @@ export default function Home() {
 
       <Switch name="hello" label="Active" />
       <SearchBar placeholder="Search something..." />
+
+      <Dropdown>
+      <p>Hello</p>
+       <p>World</p>
+        <p>Yes</p>
+      </Dropdown>
     </main>
   );
 }
