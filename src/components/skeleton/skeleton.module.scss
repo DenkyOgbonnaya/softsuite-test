@@ -1,0 +1,46 @@
+@use "@/styles" as *;
+
+.skeleton {
+  animation: skeleton 5s infinite;
+  height: 30px;
+  width: 100%;
+  opacity: 1;
+  background-color: color(surface);
+}
+
+.text {
+    animation: skeleton 5s infinite;
+    height: 20px;
+    width: 100%;
+    opacity: 1;
+    background-color: color(surface);
+  }
+.circle {
+  animation: skeleton 5s infinite;
+  height: 80px;
+  width: 80;
+  border-radius: 100%;
+  opacity: 1;
+  background-color: color(surface);
+}
+
+@keyframes skeleton {
+  0% {
+    opacity: 0.5;
+  }
+  20% {
+    opacity: 0.6;
+    background-color: #e2e8f0;
+  }
+  40% {
+    opacity: 0.7;
+  }
+  60% {
+    opacity: 0.8;
+    background-color: #edf2f7;
+  }
+  100% {
+    opacity: 1;
+    background-color: color(surface);
+  }
+}

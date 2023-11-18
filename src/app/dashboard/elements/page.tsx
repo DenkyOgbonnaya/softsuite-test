@@ -15,12 +15,10 @@ import NavBar from "../_layouts/navBar";
 import { Filter, Plus } from "@/assets";
 import { TableHeadProps } from "@/components/tableHead";
 import { useGetElementsQuery } from "@/services/elements.services";
+import { Skeleton } from "@/components/skeleton";
 
 export default function Elements() {
-
-  const {data} = useGetElementsQuery()
-
-  console.log(data, 'DATA')
+const {isLoading, data} = useGetElementsQuery()
   const pagePath = ["Payroll Management", "Element Setup", "Elements"];
 
   const tableHeadData: TableHeadProps["data"] = [
@@ -76,6 +74,8 @@ export default function Elements() {
       <div className={styles.main}>
         <BreadCrumb path={pagePath} />
 
+        <Skeleton />
+
         <div className={styles.card}>
           <h1 className={styles.title}>Elements</h1>
           <div className={styles.actions}>
@@ -89,10 +89,12 @@ export default function Elements() {
             </Button>
           </div>
           <>
+
             {elements.length > 0 ? (
               <TableContainer>
                 <Table>
                   <TableHead data={tableHeadData} onSort={handleSorting} />
+
 
                   <tbody>
                     <tr>
