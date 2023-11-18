@@ -1,0 +1,53 @@
+@use "@/styles" as *;
+.container {
+  background-color: color(surface);
+  height: 100%;
+  overflow: auto;
+}
+.navBar {
+  position: sticky;
+  position: -webkit-sticky;
+}
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.88rem;
+  padding: 3rem;
+  flex: 1;
+  overflow: auto
+}
+.card {
+  @include card;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.title {
+  font-family: font-family(body);
+  font-size: 1.1875rem;
+  font-weight: font-weight(ss-bold);
+  color: color(primary-0-tint);
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 4.5rem;
+  padding: spacing(base);
+  background-color: color(surface);
+}
+
+.hstack {
+  display: flex;
+  gap: spacing(base);
+  align-items: center;
+}
+.empty {
+  margin: 7.69rem 0;
+}
+
+.td {
+  @include td;
+}

@@ -15,7 +15,9 @@ $colors: (
   placeholder: #818DA9,
   background-color: $white,
   gray-2: #828282,
-  surface: #F6F7F9
+  surface: #F6F7F9,
+  geyser: #CDE1E3,
+  blur: #E2E2E2
 );
 
 $fontFamily: (
@@ -23,6 +25,9 @@ $fontFamily: (
   heading: --font-gilroy,
   display: --font-gilroy,
   link: --font-poppins,
+  numerals: --font-montserrat
+
+
 );
 $fontSize: (
   xs: 0.75rem,

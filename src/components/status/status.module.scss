@@ -1,0 +1,23 @@
+@use "@/styles" as *;
+
+.base {
+  display: flex;
+  padding: 0.375rem 0.5rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 2.5rem;
+
+  text-align: center;
+  font-family: font-family(body);
+  font-size: font-size(xs);
+  font-weight: font-weight(ss-medium);
+}
+.active {
+  background-color: #f4faf7;
+  color: color(secondary-color-0-tint);
+}
+.inactive {
+  background-color: rgba(224, 84, 83, 0.05);
+  color: color(danger);
+}

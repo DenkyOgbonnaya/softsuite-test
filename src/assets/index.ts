@@ -12,3 +12,7 @@ export {default as Plus} from "./icons/plus.svg"
 export {default as Bell} from './icons/bell.svg'
 export {default as Sort} from './icons/sort.svg'
 export {default as ChevronRight} from './icons/chevronRight.svg'
+export {default as Filter} from "./icons/filter.svg"
+export {default as EmptyIcon} from "./icons/empty.svg"
+export {default as Caution} from "./icons/caution.svg"
+export {default as ChevronLeft} from './icons/chevronLeft.svg'

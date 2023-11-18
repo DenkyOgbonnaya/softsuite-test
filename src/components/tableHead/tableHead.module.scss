@@ -1,0 +1,25 @@
+@use "@/styles" as *;
+
+.container {
+  background-color: color(primary-0-tint);
+  height: 3.125rem;
+  width: 100%;
+}
+.th {
+  padding: 0.6875rem 1rem;
+  color: $white;
+  font-size: font-size(sm);
+  font-family: font-family(body);
+  font-weight: font-weight(ss-medium);
+}
+.sortIco {
+  outline: none;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+.hstack {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}

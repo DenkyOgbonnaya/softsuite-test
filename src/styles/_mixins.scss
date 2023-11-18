@@ -45,3 +45,18 @@
     border: 1px solid color(primary-40-tint);
   }
 }
+
+@mixin card {
+  background-color: color(background-color);
+  border-radius: 0.625rem 0.625rem 0rem 0rem;
+  padding: spacing(2xl);
+}
+
+@mixin td {
+  padding: 0.6875rem 1rem;
+  color: color(primary-0-tint);
+  font-size: font-size(sm);
+  font-family: font-family(body);
+  font-weight: font-weight(ss-normal);
+  border-bottom: 1px solid color(geyser);
+}
