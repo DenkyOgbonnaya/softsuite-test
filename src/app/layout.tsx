@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "@/styles/globals.scss";
 import { gilroy, poppins, montserrat } from "@/styles/fonts";
+import { Providers } from "./providers";
 
 export const metadata: Metadata = {
   title: "SoftSuite",
@@ -16,8 +17,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${gilroy.variable} ${poppins.variable} ${montserrat.variable}`}>
-        {children}
+      <body
+        className={`${gilroy.variable} ${poppins.variable} ${montserrat.variable}`}
+      >
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

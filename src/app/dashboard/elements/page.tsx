@@ -14,8 +14,13 @@ import styles from "./page.module.scss";
 import NavBar from "../_layouts/navBar";
 import { Filter, Plus } from "@/assets";
 import { TableHeadProps } from "@/components/tableHead";
+import { useGetElementsQuery } from "@/services/elements.services";
 
 export default function Elements() {
+
+  const {data} = useGetElementsQuery()
+
+  console.log(data, 'DATA')
   const pagePath = ["Payroll Management", "Element Setup", "Elements"];
 
   const tableHeadData: TableHeadProps["data"] = [
