@@ -1,0 +1,18 @@
+@use "@/styles" as *;
+.container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.path {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: font-size(base);
+
+  font-weight: font-weight(ss-bold);
+  color: color(primary-60-tint);
+}
+.activePath {
+  color: color(primary-0-tint);
+}
