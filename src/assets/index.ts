@@ -16,3 +16,4 @@ export {default as Filter} from "./icons/filter.svg"
 export {default as EmptyIcon} from "./icons/empty.svg"
 export {default as Caution} from "./icons/caution.svg"
 export {default as ChevronLeft} from './icons/chevronLeft.svg'
+export {default as MoreIcon} from './icons/more.svg'

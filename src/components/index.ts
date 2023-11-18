@@ -13,4 +13,5 @@ export { default as TableHead } from "./tableHead";
 export { default as TableContainer } from "./tableContainer";
 export { default as Table } from "./table";
 export { default as Status } from "./status";
-export {default as Pagination} from './pagination'
+export { default as Pagination } from "./pagination";
+export { default as TableLoader } from "./tableLoader";

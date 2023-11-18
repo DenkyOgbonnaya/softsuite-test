@@ -9,16 +9,24 @@ import {
   Table,
   TableContainer,
   TableHead,
+  TableLoader,
 } from "@/components";
 import styles from "./page.module.scss";
 import NavBar from "../_layouts/navBar";
-import { Filter, Plus } from "@/assets";
+import { Filter, MoreIcon, Plus } from "@/assets";
 import { TableHeadProps } from "@/components/tableHead";
 import { useGetElementsQuery } from "@/services/elements.services";
-import { Skeleton } from "@/components/skeleton";
+import { formatDate } from "@/utills/date";
+import { usePaginatedRecords } from "@/hooks";
+import { IElement } from "@/types/elements.types";
 
 export default function Elements() {
-const {isLoading, data} = useGetElementsQuery()
+  const { isLoading, data } = useGetElementsQuery();
+  const LIMIT = 10;
+
+  const { paginatedRecords, totalPages, setCurrentPage, currentPage } =
+    usePaginatedRecords<IElement>(data?.data?.content ?? [], LIMIT);
+
   const pagePath = ["Payroll Management", "Element Setup", "Elements"];
 
   const tableHeadData: TableHeadProps["data"] = [
@@ -59,12 +67,15 @@ const {isLoading, data} = useGetElementsQuery()
   ];
 
   const elements = ["1"];
-  const active = "active";
-  const inactive = "inactive";
+
+  const status: Record<string, "active" | "inactive"> = {
+    active: "active",
+    inactive: "inactive",
+  };
 
   const handleSorting = (key: string) => {};
 
-  const handlePagination = (page: number) => {};
+ 
   return (
     <div className={styles.container}>
       <div className={styles.navBar}>
@@ -73,8 +84,6 @@ const {isLoading, data} = useGetElementsQuery()
 
       <div className={styles.main}>
         <BreadCrumb path={pagePath} />
-
-        <Skeleton />
 
         <div className={styles.card}>
           <h1 className={styles.title}>Elements</h1>
@@ -89,62 +98,56 @@ const {isLoading, data} = useGetElementsQuery()
             </Button>
           </div>
           <>
-
             {elements.length > 0 ? (
               <TableContainer>
                 <Table>
                   <TableHead data={tableHeadData} onSort={handleSorting} />
 
-
                   <tbody>
-                    <tr>
-                      <td className={styles.td}>Annul Gross Element</td>
-                      <td className={styles.td}>Deduction</td>
-                      <td className={styles.td}>Pre tax</td>
-                      <td className={styles.td}>
-                        <Status status="active" intent="active" />
-                      </td>
-                      <td className={styles.td}>14 - 02 - 2022 || 09:30 AM</td>
-                      <td className={styles.td}>Samson Ayorinde</td>
-                      <td className={styles.td}>more</td>
-                    </tr>
-                    <tr>
-                      <td className={styles.td}>Annul Gross Element</td>
-                      <td className={styles.td}>Deduction</td>
-                      <td className={styles.td}>Pre tax</td>
-                      <td className={styles.td}>
-                        <Status status={inactive} intent={inactive} />
-                      </td>
-                      <td className={styles.td}>14 - 02 - 2022 || 09:30 AM</td>
-                      <td className={styles.td}>Samson Ayorinde</td>
-                      <td className={styles.td}>more</td>
-                    </tr>
-                    <tr>
-                      <td className={styles.td}>Annul Gross Element</td>
-                      <td className={styles.td}>Deduction</td>
-                      <td className={styles.td}>Pre tax</td>
-                      <td className={styles.td}>
-                        <Status status={active} intent={"inactive"} />
-                      </td>
-                      <td className={styles.td}>14 - 02 - 2022 || 09:30 AM</td>
-                      <td className={styles.td}>Samson Ayorinde</td>
-                      <td className={styles.td}>more</td>
-                    </tr>
+                    <TableLoader
+                      isLoading={isLoading}
+                      colSpan={tableHeadData.length}
+                    >
+                      <>
+                        {paginatedRecords?.map((element) => (
+                          <tr key={element.name} className={styles.tr}>
+                            <td>{element.name}</td>
+                            <td>{element.categoryId}</td>
+                            <td>{element.classificationId}</td>
+                            <td>
+                              {" "}
+                              <Status
+                                status={element.status}
+                                intent={
+                                  status[
+                                    element.status?.toString().toLowerCase()
+                                  ]
+                                }
+                              />
+                            </td>
+                            <td>{formatDate(element.effectiveStartDate)}</td>
+                            <td>{element.reportingName}</td>
+                            <td>
+                              <MoreIcon />
+                            </td>
+                          </tr>
+                        ))}
+                      </>
+                    </TableLoader>
                   </tbody>
                 </Table>
-               
               </TableContainer>
             ) : (
               <div className={styles.empty}>
                 <Empty message="There are no elements to display" />
               </div>
             )}
-             <Pagination
-                  currentPage={1}
-                  totalCount={30}
-                  pageLimit={10}
-                  onPaginate={handlePagination}
-                />
+            <Pagination
+              currentPage={currentPage}
+              totalCount={totalPages}
+              pageLimit={LIMIT}
+              onPaginate={setCurrentPage}
+            />
           </>
         </div>
       </div>
