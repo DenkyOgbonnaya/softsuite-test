@@ -11,17 +11,31 @@ import {
   TableHead,
   TableLoader,
 } from "@/components";
+import { Menu, MenuItem, MenuButton, SubMenu } from "@szhsin/react-menu";
 import styles from "./page.module.scss";
 import NavBar from "../_layouts/navBar";
-import { Filter, MoreIcon, Plus, SuccessCheck } from "@/assets";
+import {
+  DeleteIcon,
+  Eye,
+  Filter,
+  MoreIcon,
+  Pencil,
+  Plus,
+  SuccessCheck,
+} from "@/assets";
 import { TableHeadProps } from "@/components/tableHead";
 import {
   useCreateElementMutation,
   useGetElementsQuery,
+  useUpdateElementMutation,
 } from "@/services/elements.services";
 import { formatDate } from "@/utills/date";
 import { usePaginatedRecords } from "@/hooks";
-import { CreateElentInput, IElement } from "@/types/elements.types";
+import {
+  CreateElentInput,
+  IElement,
+  EditElementInput,
+} from "@/types/elements.types";
 import { useState } from "react";
 import OVerlay from "@/components/overlay";
 import ElementForm from "./_components/elementForm";
@@ -31,15 +45,29 @@ import {
   MutationDataResponse,
   MutationErrorResponse,
 } from "@/types/http.types";
+import "@szhsin/react-menu/dist/index.css";
+
+interface ToggleState {
+  showCreate: boolean;
+  showSuccess: boolean;
+  showEdit: boolean;
+  showDelete: boolean;
+}
 
 export default function Elements() {
-  const [showCreateForm, setShowCreateForm] = useState(false);
-  const [showCreateSuccess, setShowCreateSuccess] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErroMessage] = useState("");
+  const [editableElement, setEditableElement] = useState<IElement | null>(null);
+  const [toggleState, setToggleState] = useState<ToggleState>({
+    showCreate: false,
+    showDelete: false,
+    showEdit: false,
+    showSuccess: false,
+  });
 
   const { isLoading, data } = useGetElementsQuery();
   const [createElement, createElementRes] = useCreateElementMutation();
+  const [updateElement, updateElementRes] = useUpdateElementMutation();
   const LIMIT = 10;
 
   const { paginatedRecords, totalPages, setCurrentPage, currentPage } =
@@ -83,13 +111,14 @@ export default function Elements() {
       key: "",
     },
   ];
-
-  const toggleCreateForm = () => {
-    setShowCreateForm(!showCreateForm);
+  const handleToggle = (key: keyof ToggleState) => {
+    setToggleState((state) => ({ ...state, [key]: !state[key] }));
   };
 
-  const toggleCreateSuccess = () => {
-    setShowCreateSuccess(!showCreateSuccess);
+  const onEditElement = (element: IElement) => {
+    setEditableElement(() => element);
+
+    handleToggle("showEdit");
   };
 
   const elements = ["1"];
@@ -113,8 +142,33 @@ export default function Elements() {
 
     if (responseData) {
       setSuccessMessage(responseData.data.message);
-      toggleCreateForm();
-      toggleCreateSuccess();
+      handleToggle("showCreate");
+      handleToggle("showSuccess");
+      setCurrentPage(0);
+    }
+
+    if (responseError) {
+      const error = responseError.error as HttpError;
+      setErroMessage(error?.data?.response?.message);
+    }
+  };
+
+  const handleUpdateElement = async (data: IElement) => {
+    const payload: EditElementInput = {
+      data,
+      id: editableElement?.id!,
+    };
+    const response = await updateElement(payload);
+
+    const responseData = response as MutationDataResponse<IElement>;
+    const responseError = response as MutationErrorResponse;
+
+    if (responseData) {
+      setSuccessMessage(responseData.data.message);
+      handleToggle("showEdit");
+      handleToggle("showSuccess");
+      setCurrentPage(0);
+      setEditableElement(null)
     }
 
     if (responseError) {
@@ -140,7 +194,7 @@ export default function Elements() {
               <Filter />
             </div>
 
-            <Button size="medium" onClick={toggleCreateForm}>
+            <Button size="medium" onClick={() => handleToggle("showCreate")}>
               Create Element <Plus />{" "}
             </Button>
           </div>
@@ -175,7 +229,32 @@ export default function Elements() {
                             <td>{formatDate(element.effectiveStartDate)}</td>
                             <td>{element.modifiedBy}</td>
                             <td>
-                              <MoreIcon />
+                              <Menu
+                                menuButton={
+                                  <MenuButton className={styles.menuBtn}>
+                                    <MoreIcon />
+                                  </MenuButton>
+                                }
+                                className={styles.menu}
+                              >
+                                <MenuItem className={styles.menuItem}>
+                                  <Eye />
+                                  View Element Links
+                                </MenuItem>
+                                <MenuItem
+                                  className={styles.menuItem}
+                                  onClick={() => onEditElement(element)}
+                                >
+                                  <Pencil />
+                                  Edit Element
+                                </MenuItem>
+                                <MenuItem
+                                  className={`${styles.menuItem} ${styles.deleteMenu}`}
+                                >
+                                  <DeleteIcon />
+                                  Delete Element
+                                </MenuItem>
+                              </Menu>
                             </td>
                           </tr>
                         ))}
@@ -198,17 +277,26 @@ export default function Elements() {
           </>
         </div>
       </div>
-      <OVerlay visible={showCreateForm}>
+      <OVerlay visible={toggleState.showCreate}>
         <ElementForm
-          onClose={toggleCreateForm}
+          onClose={() => handleToggle("showCreate")}
           onSubmit={handleCreateElement}
           isLoading={createElementRes.isLoading}
           erroMessage={errorMessage}
         />
       </OVerlay>
-      <OVerlay visible={showCreateSuccess}>
+      <OVerlay visible={toggleState.showEdit}>
+        <ElementForm
+          onClose={() => handleToggle("showEdit")}
+          data={editableElement!}
+          onSubmit={handleUpdateElement}
+          isLoading={updateElementRes.isLoading}
+          erroMessage={errorMessage}
+        />
+      </OVerlay>
+      <OVerlay visible={toggleState.showSuccess}>
         <Dialog
-          onClose={toggleCreateSuccess}
+          onClose={() => handleToggle("showSuccess")}
           message={successMessage}
           actionText="Close to continue"
           icon={<SuccessCheck />}

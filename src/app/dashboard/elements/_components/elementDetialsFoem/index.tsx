@@ -98,7 +98,6 @@ export function ElementDetailsForm({ changeProps, onCancel, onSubmit }: Props) {
       ElementDetailsValidationSchema
     );
 
-   
     if (isValid) {
       onSubmit();
     } else {
@@ -185,9 +184,7 @@ export function ElementDetailsForm({ changeProps, onCancel, onSubmit }: Props) {
             }
             error={errors.payRunId ? true : false}
             errorMessage={
-              errors.payRunId !== undefined
-                ? errors.payRunId.toString()
-                : ""
+              errors.payRunId !== undefined ? errors.payRunId.toString() : ""
             }
           />
         </div>

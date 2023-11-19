@@ -1,4 +1,5 @@
 export interface IElement {
+  id?: number;
   name: string;
   description: string;
   payRunId: number | undefined;
@@ -20,4 +21,9 @@ export interface IElement {
 
 export interface CreateElentInput extends IElement {
  
+}
+
+export interface EditElementInput {
+  id: number;
+  data: IElement
 }

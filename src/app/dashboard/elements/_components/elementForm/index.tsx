@@ -1,4 +1,4 @@
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 // import { Stepper } from "react-form-stepper";
 import { ElementDetailsForm } from "../elementDetialsFoem";
 import styles from "./elementForm.module.scss";
@@ -41,6 +41,13 @@ export default function ElementForm({
       payFrequency: "",
     }
   );
+
+  const { setState } = changeProps;
+  useEffect(() => {
+    if (data) {
+      setState(data);
+    }
+  }, [data, setState]);
 
   const handleNext = () => {
     setCurrentForm((currentForm) => currentForm + 1);

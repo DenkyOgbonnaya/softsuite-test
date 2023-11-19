@@ -1,6 +1,10 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { BASE_URL } from "@/contstants/environment";
-import { CreateElentInput, IElement } from "@/types/elements.types";
+import {
+  CreateElentInput,
+  EditElementInput,
+  IElement,
+} from "@/types/elements.types";
 import { HttpResponse, PaginatedHttpResponseData } from "@/types/http.types";
 
 export const elementsApi = createApi({
@@ -23,7 +27,22 @@ export const elementsApi = createApi({
       },
       invalidatesTags: ["elements"],
     }),
+    updateElement: builder.mutation<HttpResponse<IElement>, EditElementInput>({
+      query(data) {
+        return {
+          url: `/elements/${data.id}`,
+          method: "PUT",
+          credentials: "omit",
+          body: data.data,
+        };
+      },
+      invalidatesTags: ["elements"],
+    }),
   }),
 });
 
-export const { useGetElementsQuery, useCreateElementMutation } = elementsApi;
+export const {
+  useGetElementsQuery,
+  useCreateElementMutation,
+  useUpdateElementMutation,
+} = elementsApi;

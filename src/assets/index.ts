@@ -20,3 +20,7 @@ export { default as MoreIcon } from "./icons/more.svg";
 export { default as Dangercheck } from "./icons/dangerCheck.svg";
 export { default as SuccessCheck } from "./icons/successCheck.svg";
 export { default as Trash } from "./icons/trash.svg";
+export {default as Pencil} from "./icons/pencil.svg"
+export {default as Eye} from "./icons/eye.svg"
+export {default as DeleteIcon} from "./icons/deleteIcon.svg"
+
