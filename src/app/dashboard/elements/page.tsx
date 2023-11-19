@@ -13,15 +13,33 @@ import {
 } from "@/components";
 import styles from "./page.module.scss";
 import NavBar from "../_layouts/navBar";
-import { Filter, MoreIcon, Plus } from "@/assets";
+import { Filter, MoreIcon, Plus, SuccessCheck } from "@/assets";
 import { TableHeadProps } from "@/components/tableHead";
-import { useGetElementsQuery } from "@/services/elements.services";
+import {
+  useCreateElementMutation,
+  useGetElementsQuery,
+} from "@/services/elements.services";
 import { formatDate } from "@/utills/date";
 import { usePaginatedRecords } from "@/hooks";
-import { IElement } from "@/types/elements.types";
+import { CreateElentInput, IElement } from "@/types/elements.types";
+import { useState } from "react";
+import OVerlay from "@/components/overlay";
+import ElementForm from "./_components/elementForm";
+import Dialog from "@/components/dialog";
+import {
+  HttpError,
+  MutationDataResponse,
+  MutationErrorResponse,
+} from "@/types/http.types";
 
 export default function Elements() {
+  const [showCreateForm, setShowCreateForm] = useState(false);
+  const [showCreateSuccess, setShowCreateSuccess] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErroMessage] = useState("");
+
   const { isLoading, data } = useGetElementsQuery();
+  const [createElement, createElementRes] = useCreateElementMutation();
   const LIMIT = 10;
 
   const { paginatedRecords, totalPages, setCurrentPage, currentPage } =
@@ -66,6 +84,14 @@ export default function Elements() {
     },
   ];
 
+  const toggleCreateForm = () => {
+    setShowCreateForm(!showCreateForm);
+  };
+
+  const toggleCreateSuccess = () => {
+    setShowCreateSuccess(!showCreateSuccess);
+  };
+
   const elements = ["1"];
 
   const status: Record<string, "active" | "inactive"> = {
@@ -75,7 +101,28 @@ export default function Elements() {
 
   const handleSorting = (key: string) => {};
 
- 
+  const handleCreateElement = async (data: IElement) => {
+    const payload: CreateElentInput = {
+      ...data,
+      modifiedBy: "Dennis Ogbonnaya",
+    };
+    const response = await createElement(payload);
+
+    const responseData = response as MutationDataResponse<IElement>;
+    const responseError = response as MutationErrorResponse;
+
+    if (responseData) {
+      setSuccessMessage(responseData.data.message);
+      toggleCreateForm();
+      toggleCreateSuccess();
+    }
+
+    if (responseError) {
+      const error = responseError.error as HttpError;
+      setErroMessage(error?.data?.response?.message);
+    }
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.navBar}>
@@ -93,7 +140,7 @@ export default function Elements() {
               <Filter />
             </div>
 
-            <Button size="medium">
+            <Button size="medium" onClick={toggleCreateForm}>
               Create Element <Plus />{" "}
             </Button>
           </div>
@@ -126,7 +173,7 @@ export default function Elements() {
                               />
                             </td>
                             <td>{formatDate(element.effectiveStartDate)}</td>
-                            <td>{element.reportingName}</td>
+                            <td>{element.modifiedBy}</td>
                             <td>
                               <MoreIcon />
                             </td>
@@ -151,6 +198,22 @@ export default function Elements() {
           </>
         </div>
       </div>
+      <OVerlay visible={showCreateForm}>
+        <ElementForm
+          onClose={toggleCreateForm}
+          onSubmit={handleCreateElement}
+          isLoading={createElementRes.isLoading}
+          erroMessage={errorMessage}
+        />
+      </OVerlay>
+      <OVerlay visible={showCreateSuccess}>
+        <Dialog
+          onClose={toggleCreateSuccess}
+          message={successMessage}
+          actionText="Close to continue"
+          icon={<SuccessCheck />}
+        />
+      </OVerlay>
     </div>
   );
 }

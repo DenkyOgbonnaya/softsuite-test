@@ -1,0 +1,98 @@
+.stepperItem {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+@keyframes animate {
+  100% {
+    transform: scaleX(1);
+  }
+}
+.stepperItem::before {
+  position: absolute;
+  content: "";
+  border-bottom: 1px solid #ccc;
+  width: 100%;
+  top: 20px;
+  left: -50%;
+  z-index: 2;
+}
+
+.stepperItem::after {
+  position: absolute;
+  content: "";
+  border-bottom: 2px solid #ccc;
+  width: 100%;
+  top: 20px;
+  left: 50%;
+  z-index: 2;
+}
+
+.stepperItem .stepCounter {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-bottom: 6px;
+
+  display: inline-block;
+  // background: transparent url("../../assets/Icons/circle-solid.svg") 0% 0% no-repeat
+  //   padding-box;
+  background-position: center;
+}
+
+.stepperItem.active .stepCounter {
+  font-weight: bold;
+  // background: transparent url("../../assets/Icons/bullseye-solid.svg") 0% 0%
+  //   no-repeat padding-box;
+  background-position: center;
+}
+
+.stepperItem.completed .stepCounter {
+  // background: transparent url("../../assets/Icons/dot-cirle.svg") 0% 0%
+  //   no-repeat padding-box;
+  background-position: center;
+}
+
+.stepperItem.completed::after {
+  position: absolute;
+  content: "";
+  border-bottom: 2px solid #00c8f0;
+  width: 100%;
+  top: 20px;
+  left: 49%;
+  z-index: 3;
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: animate 0.2s linear forwards;
+}
+
+.stepperItem:first-child::before {
+  content: none;
+}
+.stepperItem:last-child::after {
+  content: none;
+}
+.stepName {
+  font-weight: normal;
+  font-size: 13px;
+  color: #cccccc;
+  font-style: var(--open-sans);
+  margin-top: 0px;
+}
+.stepperItem.completed .stepName,
+.stepperItem.active .stepName {
+  color: var(--dark-303030);
+  transition: 0.2s linear;
+}
+@media (max-width: 768px) {
+  .stepperItem {
+    font-size: 12px;
+  }
+}

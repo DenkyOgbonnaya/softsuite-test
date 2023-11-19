@@ -17,7 +17,7 @@ export default function RadioButton({
     <>
       <label htmlFor={value} className={styles.container}>
         {label && label}
-        <input name={name} id={value} type="radio" {...rest} />
+        <input name={name} id={value} value={value} type="radio" {...rest} />
         <span className={styles.checkmark}></span>
       </label>
     </>

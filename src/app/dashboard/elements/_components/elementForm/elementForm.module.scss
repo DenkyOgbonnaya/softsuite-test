@@ -1,0 +1,8 @@
+@use "@/styles" as *;
+.container {
+  background-color: $white;
+  padding: 1.5rem 2.5rem;
+  width: 60%;
+  overflow: auto;
+  border-radius: 0.5rem
+}

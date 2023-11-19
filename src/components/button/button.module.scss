@@ -22,7 +22,7 @@
   }
   &:disabled {
     opacity: opacity(40);
-    cursor:not-allowed
+    cursor: not-allowed;
   }
 }
 .outline {
@@ -34,6 +34,20 @@
 }
 .link {
   text-decoration: underline;
+  &:hover {
+    opacity: opacity(80);
+  }
+}
+.danger {
+  background-color: color(danger);
+  color: $white;
+  &:hover {
+    opacity: opacity(80);
+  }
+}
+.blur {
+  color: color(ss-gray);
+  border: 2px solid color(ss-gray);
   &:hover {
     opacity: opacity(80);
   }

@@ -1,7 +1,6 @@
-import { ComponentProps } from "react";
+import { ComponentProps, ReactNode } from "react";
 import { cva, VariantProps } from "class-variance-authority";
-import styles from "./dateInput.module.scss";
-import { CalendarIcon } from "@/assets";
+import styles from "./selectInput.module.scss";
 
 const input = cva(styles.input, {
   variants: {
@@ -20,37 +19,35 @@ const input = cva(styles.input, {
   },
 });
 
-export interface DateInputProps
-  extends ComponentProps<"input">,
+export interface InputProps
+  extends ComponentProps<"select">,
     VariantProps<typeof input> {
   name: string;
   label?: string;
+  children: ReactNode;
   errorMessage?: string;
 }
-export default function DateInput({
+export default function Input({
   name,
   label,
   errorMessage,
   className,
   intent,
   error,
+  children,
   ...rest
-}: DateInputProps) {
+}: InputProps) {
   return (
     <>
       <label className={styles.label} htmlFor={name}>
         {label && label}
-        <div className={styles.dateWrap}>
-          <input
-            name={name}
-            className={input({ intent, error, className })}
-            type="date"
-            {...rest}
-          />
-          <span className={styles.dateIcon}>
-            <CalendarIcon />
-          </span>
-        </div>
+        <select
+          name={name}
+          className={input({ intent, error, className })}
+          {...rest}
+        >
+          {children}
+        </select>
 
         {errorMessage && (
           <div className={styles.errorWrap}>

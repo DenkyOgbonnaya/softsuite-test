@@ -1,60 +1,174 @@
-import { ComponentProps, ReactNode } from "react";
-import { cva, VariantProps } from "class-variance-authority";
+import { ChevronDown } from "@/assets";
+import React, { ComponentProps, FC, useEffect, useState } from "react";
+import Select, { ActionMeta, StylesConfig, components } from "react-select";
 import styles from "./selectInput.module.scss";
 
-const input = cva(styles.input, {
-  variants: {
-    intent: {
-      primary: styles.input,
-    },
-    error: {
-      true: styles.error,
-      false: styles.input,
-    },
-  },
-
-  defaultVariants: {
-    intent: "primary",
-    error: false,
-  },
-});
-
-export interface InputProps
-  extends ComponentProps<"select">,
-    VariantProps<typeof input> {
+type SelectOption = {
+  label: string;
+  value: string | number;
+};
+type Event = {
+  target: {
+    name: string;
+    value: any;
+  };
+};
+type SelectProps = ComponentProps<Select>;
+interface IProps extends SelectProps {
+  options: SelectOption[];
   name: string;
   label?: string;
-  children: ReactNode;
+  value: string | number;
+  placeholder: string;
   errorMessage?: string;
+  isRequired?: boolean;
+  isMulti?: boolean;
+  error?: boolean;
+  onChangeHandler: (event: Event) => void;
 }
-export default function Input({
-  name,
+
+const dot = (color = "transparent") => ({
+  alignItems: "center",
+  display: "flex",
+});
+
+const SelectInput: FC<IProps> = ({
   label,
   errorMessage,
-  className,
-  intent,
   error,
-  children,
+  isRequired,
+  placeholder,
+  options,
+  name,
+  isMulti,
+  onChangeHandler,
+  value,
   ...rest
-}: InputProps) {
-  return (
-    <>
-      <label className={styles.label} htmlFor={name}>
-        {label && label}
-        <select
-          name={name}
-          className={input({ intent, error, className })}
-          {...rest}
-        >
-          {children}
-        </select>
+}) => {
+  const colourStyles: StylesConfig = {
+    placeholder: (base, state) => ({
+      ...base,
+      fontSize: "1rem",
+      fontFamily: "Gilroy",
+      fontWeight: "500",
+      color: "#818DA9",
+      display:
+        state.isFocused || state.selectProps.inputValue ? "none" : "block",
+      width: "100%",
+    }),
+    menu: (base) => ({
+      ...base,
+      fontSize: "1rem",
+      color: "#8C8F97",
+      fontFamily: "Ubuntu",
+      fontWeight: "500",
+      zIndex: 3,
+    }),
+    control: (styles) => ({
+      ...styles,
+      backgroundColor: "white",
+      paddingRight: "1rem",
+      borderRadius: "0.25rem",
+      border: !error ? "1px solid #E5E5E5" : "1px solid red",
+      height: "3.5rem;",
+    }),
+    valueContainer: (styles) => ({
+      ...styles,
+      overflow: "visible",
+    }),
+    option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+      return {
+        ...styles,
+        backgroundColor: isDisabled
+          ? "#F9F9F9"
+          : isSelected
+          ? "#F9F9F9"
+          : isFocused
+          ? "#F9F9F9"
+          : undefined,
+        color: isDisabled ? "#ccc" : isSelected ? "#818DA9" : "#818DA9",
+        cursor: isDisabled ? "not-allowed" : "default",
 
-        {errorMessage && (
-          <div className={styles.errorWrap}>
-            <span className={styles.errorLabel}>{errorMessage}</span>
-          </div>
-        )}
-      </label>
-    </>
+        ":active": {
+          ...styles[":active"],
+          backgroundColor: !isDisabled
+            ? isSelected
+              ? "##F9F9F9"
+              : "#F9F9F9"
+            : "white",
+        },
+      };
+    },
+    input: (styles) => ({ ...styles, ...dot() }),
+    singleValue: (styles, { data }) => ({
+      ...styles,
+      fontSize: "1rem",
+      position: "relative",
+      color: "#818DA9",
+      fontFamily: "Gilroy",
+      fontWeight: "500",
+      paddingLeft: "0.5rem",
+    }),
+  };
+  const [defaultValue, setDefaultValue] = useState<SelectOption | null>(null);
+
+  useEffect(() => {
+    const getDefultValue = () => {
+      if (value) {
+        const theValue = options?.find((option) => option.value === value);
+        if (theValue) setDefaultValue(theValue);
+      }
+    };
+    getDefultValue();
+  }, [value, options]);
+
+  const handleChange = (value: unknown, actionMeta: ActionMeta<unknown>) => {
+    if (isMulti) {
+      const theVelue = value as SelectOption[];
+
+      const multiValue = theVelue.map((val) => val.value);
+      const event: Event = {
+        target: {
+          name,
+          value: multiValue,
+        },
+      };
+      onChangeHandler(event);
+    } else {
+      const theValue = value as SelectOption;
+      const event: Event = {
+        target: {
+          name,
+          value: theValue.value,
+        },
+      };
+      onChangeHandler(event);
+    }
+  };
+
+  return (
+    <div>
+      {label && <label className={styles.label}>{label}</label>}
+      <Select
+        options={options}
+        styles={colourStyles}
+        placeholder={placeholder}
+        components={{
+          IndicatorSeparator: () => null,
+          DropdownIndicator: () => <ChevronDown color="#818DA9" />,
+        }}
+        // value={defaultValue}
+        onChange={handleChange}
+        isMulti={isMulti}
+        {...rest}
+      />
+      {errorMessage && (
+        <div className={styles.errorWrap}>
+          <span className={styles.errorLabel}>{errorMessage}</span>
+        </div>
+      )}
+    </div>
   );
-}
+};
+
+export default SelectInput;

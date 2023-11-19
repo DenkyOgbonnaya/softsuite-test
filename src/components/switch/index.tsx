@@ -4,13 +4,16 @@ import styles from "./switch.module.scss";
 export interface SwitchProps extends ComponentProps<"input"> {
   label?: string;
   name: string;
+  value: string
 }
-export default function Switch({ label, name, ...rest }: SwitchProps) {
+export default function Switch({ label, name, value, ...rest }: SwitchProps) {
+
+  console.log(value, name, "hello")
   return (
     <>
       <label className={styles.switch}>
-        {label && <span className={styles.label}>{label}</span>}
-        <input name={name} type="checkbox" {...rest} />
+         <span className={styles.label}>{value === "true" ? "active" : "inactive"}</span>
+        <input name={name} value={value} type="checkbox" {...rest} />
         <span className={`${styles.slider} ${styles.round}`}></span>
       </label>
     </>

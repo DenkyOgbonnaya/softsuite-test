@@ -8,7 +8,9 @@ const button = cva(styles.base, {
       secondary: styles.secondary,
       outline: styles.outline,
       link: styles.link,
-      icon: styles.icon
+      icon: styles.icon,
+      blur: styles.blur,
+      danger: styles.danger
     },
     size: {
       small: styles.small,

@@ -5,3 +5,13 @@ export interface Lookup {
   type: string;
   id: string;
 }
+
+export interface LookupValue {
+  id: number;
+  name: string;
+  description: string;
+  status: string;
+  lookupId: number;
+  lookupName: string;
+  createdAt: string;
+}

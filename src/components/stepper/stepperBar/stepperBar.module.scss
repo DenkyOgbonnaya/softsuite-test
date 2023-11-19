@@ -1,0 +1,15 @@
+.progressBar {
+  user-select: none;
+
+  font-family: Arial;
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .progressBar .step {
+    font-size: 12px;
+  }
+}
