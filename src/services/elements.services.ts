@@ -38,6 +38,16 @@ export const elementsApi = createApi({
       },
       invalidatesTags: ["elements"],
     }),
+    deleteElement: builder.mutation<HttpResponse<IElement>, number>({
+      query(id) {
+        return {
+          url: `/elements/${id}`,
+          method: "DELETE",
+          credentials: "omit",
+        };
+      },
+      invalidatesTags: ["elements"],
+    }),
   }),
 });
 
@@ -45,4 +55,5 @@ export const {
   useGetElementsQuery,
   useCreateElementMutation,
   useUpdateElementMutation,
+  useDeleteElementMutation,
 } = elementsApi;

@@ -22,10 +22,12 @@ import {
   Pencil,
   Plus,
   SuccessCheck,
+  Trash,
 } from "@/assets";
 import { TableHeadProps } from "@/components/tableHead";
 import {
   useCreateElementMutation,
+  useDeleteElementMutation,
   useGetElementsQuery,
   useUpdateElementMutation,
 } from "@/services/elements.services";
@@ -46,6 +48,7 @@ import {
   MutationErrorResponse,
 } from "@/types/http.types";
 import "@szhsin/react-menu/dist/index.css";
+import ConfirmationDialog from "@/components/confirmationDialog";
 
 interface ToggleState {
   showCreate: boolean;
@@ -68,6 +71,7 @@ export default function Elements() {
   const { isLoading, data } = useGetElementsQuery();
   const [createElement, createElementRes] = useCreateElementMutation();
   const [updateElement, updateElementRes] = useUpdateElementMutation();
+  const [deleteElement] = useDeleteElementMutation();
   const LIMIT = 10;
 
   const { paginatedRecords, totalPages, setCurrentPage, currentPage } =
@@ -120,6 +124,10 @@ export default function Elements() {
 
     handleToggle("showEdit");
   };
+  const onDeleteElement = (element: IElement) => {
+    setEditableElement(() => element);
+    handleToggle("showDelete");
+  };
 
   const elements = ["1"];
 
@@ -168,7 +176,26 @@ export default function Elements() {
       handleToggle("showEdit");
       handleToggle("showSuccess");
       setCurrentPage(0);
-      setEditableElement(null)
+      setEditableElement(null);
+    }
+
+    if (responseError) {
+      const error = responseError.error as HttpError;
+      setErroMessage(error?.data?.response?.message);
+    }
+  };
+
+  const handleDeleteElement = async () => {
+    const response = await deleteElement(editableElement?.id!);
+
+    const responseData = response as MutationDataResponse<IElement>;
+    const responseError = response as MutationErrorResponse;
+
+    if (responseData) {
+      setSuccessMessage(responseData.data.message);
+      handleToggle("showDelete");
+      handleToggle("showSuccess");
+      setEditableElement(null);
     }
 
     if (responseError) {
@@ -250,6 +277,7 @@ export default function Elements() {
                                 </MenuItem>
                                 <MenuItem
                                   className={`${styles.menuItem} ${styles.deleteMenu}`}
+                                  onClick={() => onDeleteElement(element)}
                                 >
                                   <DeleteIcon />
                                   Delete Element
@@ -300,6 +328,18 @@ export default function Elements() {
           message={successMessage}
           actionText="Close to continue"
           icon={<SuccessCheck />}
+        />
+      </OVerlay>
+      <OVerlay visible={toggleState.showDelete}>
+        <ConfirmationDialog
+          onClose={() => handleToggle("showDelete")}
+          message="Are you sure you want to 
+          delete Element?"
+          subText="You can’t reverse this action"
+          cancelText="Cancel"
+          confirmText="Yes, Delete"
+          onOk={handleDeleteElement}
+          icon={<Trash />}
         />
       </OVerlay>
     </div>

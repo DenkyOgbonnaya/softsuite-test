@@ -14,7 +14,12 @@
 }
 .actions {
   display: flex;
-  gap: 0.5rem;
+  gap: 1rem;
+  margin-top: 1rem;
+  & > button:last-child {
+    padding-right: 2.5rem;
+    padding-left: 2.5rem;
+  }
 }
 .message {
   font-size: font-size(2xl);
