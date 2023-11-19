@@ -1,0 +1,105 @@
+@use "@/styles" as *;
+.container {
+  background-color: color(surface);
+  height: 100%;
+  overflow: auto;
+}
+.navBar {
+  position: sticky;
+  position: -webkit-sticky;
+}
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.88rem;
+  padding: 3rem;
+  flex: 1;
+  overflow: auto;
+}
+.card {
+  @include card;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.title {
+  font-family: font-family(body);
+  font-size: 1.1875rem;
+  font-weight: font-weight(ss-bold);
+  color: color(primary-0-tint);
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 4.5rem;
+  padding: spacing(base);
+  background-color: color(surface);
+}
+.viewLink {
+  color: color(secondary-color-0-tint);
+  font-size: 0.875rem;
+}
+.hstack {
+  display: flex;
+  gap: spacing(base);
+  align-items: center;
+}
+.empty {
+  margin: 7.69rem 0;
+}
+.table {
+  width: 100;
+  border: 1px solid color(geyser);
+  width: 100%;
+  border-collapse: collapse;
+}
+.tr > td {
+  @include td;
+}
+.tr > td div {
+  display: flex;
+  flex-direction: column;
+  gap:0.25rem
+}
+.tr > td div span:first-child {
+  font-family: font-family(body);
+  font-size: 0.6875rem;
+  font-weight: font-weight(ss-medium);
+  color: #7e7e7e;
+  line-height: 1.03125rem;
+  letter-spacing: 0.02063rem;
+  text-transform: uppercase;
+}
+.tr > td div span:last-child {
+  font-family: font-family(body);
+  font-size: 0.875rem;
+  font-weight: font-weight(ss-medium);
+  color: color(primary-0-tint);
+  line-height: 1.03125rem;
+}
+.menuBtn {
+  outline: none;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 1.06rem;
+  padding: 0.5rem;
+}
+.menuItem {
+  display: flex;
+  gap: 0.5rem;
+  font-family: font-family(body);
+  font-size: 0.75rem;
+  font-weight: font-weight(ss-medium);
+  color: color(primary-0-tint);
+}
+.deleteMenu {
+  color: color(danger);
+}

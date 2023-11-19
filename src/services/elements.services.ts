@@ -3,6 +3,7 @@ import { BASE_URL } from "@/contstants/environment";
 import {
   CreateElentInput,
   EditElementInput,
+  ElementLink,
   IElement,
 } from "@/types/elements.types";
 import { HttpResponse, PaginatedHttpResponseData } from "@/types/http.types";
@@ -48,6 +49,15 @@ export const elementsApi = createApi({
       },
       invalidatesTags: ["elements"],
     }),
+    getElement: builder.query<HttpResponse<IElement>, string | number>({
+      query: (id) => `/elements/${id}`,
+    }),
+    getElementLinks: builder.query<
+      PaginatedHttpResponseData<ElementLink[]>,
+      string | number
+    >({
+      query: (id) => `/elements/${id}/elementlinks`,
+    }),
   }),
 });
 
@@ -56,4 +66,6 @@ export const {
   useCreateElementMutation,
   useUpdateElementMutation,
   useDeleteElementMutation,
+  useGetElementQuery,
+  useGetElementLinksQuery,
 } = elementsApi;

@@ -16,7 +16,6 @@ const Pagination: FC<Props> = ({
   totalCount = 0,
   currentPage = 1,
 }) => {
-
   const handlePaginate = (selected: { selected: number }) => {
     onPaginate(selected.selected + 1);
   };
@@ -24,12 +23,16 @@ const Pagination: FC<Props> = ({
     <div className="paginationContainer">
       <div className="paginationActions">
         <p>Showing</p>
-        <SelectInput className="paginationSelect" name="" value={pageLimit}>
-          <option value={10}>10</option>
-          <option value={20}>20</option>
-          <option value={30}>30</option>
-        </SelectInput>
-        <p>out of {totalCount*pageLimit}</p>
+        <SelectInput
+          className="paginationSelect"
+          placeholder=""
+          onChangeHandler={({ target }) => {}}
+          options={[{ label: "10", value: 10 }]}
+          name=""
+          value={pageLimit}
+        />
+
+        <p>out of {totalCount * pageLimit}</p>
       </div>
       <ReactPaginate
         breakLabel="..."

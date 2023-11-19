@@ -23,4 +23,5 @@ export { default as Trash } from "./icons/trash.svg";
 export {default as Pencil} from "./icons/pencil.svg"
 export {default as Eye} from "./icons/eye.svg"
 export {default as DeleteIcon} from "./icons/deleteIcon.svg"
+export {default as BackArrow} from "./icons/backArrow.svg"
 

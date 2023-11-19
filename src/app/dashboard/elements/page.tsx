@@ -49,6 +49,8 @@ import {
 } from "@/types/http.types";
 import "@szhsin/react-menu/dist/index.css";
 import ConfirmationDialog from "@/components/confirmationDialog";
+import Link from "next/link";
+import { ELEMENTS_ROUTE } from "@/contstants/routes";
 
 interface ToggleState {
   showCreate: boolean;
@@ -264,9 +266,12 @@ export default function Elements() {
                                 }
                                 className={styles.menu}
                               >
-                                <MenuItem className={styles.menuItem}>
+                                <MenuItem >
+                                  <Link className={styles.menuItem} href={`${ELEMENTS_ROUTE}/${element.id}`}>
                                   <Eye />
                                   View Element Links
+                                  </Link>
+                                
                                 </MenuItem>
                                 <MenuItem
                                   className={styles.menuItem}
