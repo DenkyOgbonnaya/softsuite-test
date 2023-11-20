@@ -12,6 +12,9 @@
 
   font-weight: font-weight(ss-bold);
   color: color(primary-60-tint);
+  @media screen and (max-width: 768px) {
+    font-size: font-size(sm);
+    }
 }
 .activePath {
   color: color(primary-0-tint);

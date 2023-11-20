@@ -10,6 +10,9 @@
   position: -webkit-sticky;
   top: 0;
   left: 0;
+  @media screen and (max-width: 768px) {
+    display: none;
+    }
 }
 .main {
   display: flex;
@@ -40,6 +43,8 @@
   height: 4.5rem;
   padding: spacing(base);
   background-color: color(surface);
+  flex-wrap: wrap;
+  gap: 1rem
 }
 
 .hstack {

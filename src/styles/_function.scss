@@ -25,6 +25,6 @@
   @return map-get($opacity, $opacity-name);
 }
 
-@function screen($breakpoint-name) {
-  @return map-get($screens, $breakpoint-name);
+@function breakpoint($breakpoint-name) {
+  @return map-get($breakpoint, $breakpoint-name);
 }
