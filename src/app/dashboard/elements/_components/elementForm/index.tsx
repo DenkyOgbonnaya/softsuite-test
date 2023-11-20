@@ -4,6 +4,7 @@ import { ElementDetailsForm } from "../elementDetialsFoem";
 import styles from "./elementForm.module.scss";
 import { AdditionaltDetailsForm } from "../additionalDetailsForm";
 import { useInputChange } from "@/hooks";
+import Stepper from "react-stepper-horizontal";
 import { IElement } from "@/types/elements.types";
 
 interface Props {
@@ -80,10 +81,25 @@ export default function ElementForm({
 
   return (
     <div className={styles.container}>
-      {/* <Stepper
-        steps={[{ label: "Element Details" }, { label: "Additional Details" }]}
-        activeStep={currentForm + 1}
-      /> */}
+      <div className={styles.stepper}>
+      <Stepper
+        steps={[{ title: "Element Details" }, { title: "Additional Details" }]}
+        activeStep={currentForm+1}
+        activeColor="#CDE1E3"
+        defaultColor="#4BAA79"
+        completeColor="#4BAA79"
+        activeTitleColor="#4BAA79"
+        completeTitleColor="#4BAA79"
+        defaultTitleColor="#4BAA79"
+        circleFontColor="white"
+        completeBarColor="#4BAA79"
+        activeBorderColor="#4BAA79"
+        borderColor="#4BAA79"
+        defaultBorderColor="#4BAA79"
+        
+      />
+      </div>
+    
       {forms[currentForm]}
     </div>
   );
