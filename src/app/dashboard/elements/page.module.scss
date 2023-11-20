@@ -3,10 +3,13 @@
   background-color: color(surface);
   height: 100%;
   overflow: auto;
+  position: relative;
 }
 .navBar {
   position: sticky;
   position: -webkit-sticky;
+  top: 0;
+  left: 0;
 }
 .main {
   display: flex;

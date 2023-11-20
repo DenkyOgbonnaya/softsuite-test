@@ -67,6 +67,8 @@ export function AdditionaltDetailsForm({
     }
   };
 
+  console.log(state.payFrequency, "HELLOjjjj");
+
   return (
     <form className={styles.container} onSubmit={handleSubmit}>
       <div className={styles.flex}>
@@ -109,7 +111,9 @@ export function AdditionaltDetailsForm({
         </div>
         <div className={styles.col}>
           <RadioGroup
-            onChange={onChange}
+            onChange={({ target }) =>
+              onChangeByNameValue("payFrequency", target.value)
+            }
             value={state.payFrequency}
             label="Pay Frequency"
             error={errors.payFrequency ? true : false}
@@ -129,7 +133,7 @@ export function AdditionaltDetailsForm({
         <div className={styles.col}>
           <SelectInput
             name="selectedMonths"
-            value={state.selectedMonths.toString()}
+            value={state.selectedMonths}
             label="Select Pay Months"
             placeholder="Select"
             isMulti
@@ -143,7 +147,7 @@ export function AdditionaltDetailsForm({
                 value: item,
               })) || []
             }
-            error={errors.selectedMonths ? true : false}
+            error={errors.selectedMonths?.length ? true : false}
             errorMessage={errors.selectedMonths?.toString()}
           />
         </div>
@@ -153,7 +157,6 @@ export function AdditionaltDetailsForm({
         <div className={styles.col}>
           <RadioGroup
             onChange={onChange}
-            value={state.prorate}
             label="Prorate "
             error={errors.prorate ? true : false}
             errorMessage={errors.prorate}
@@ -163,19 +166,20 @@ export function AdditionaltDetailsForm({
           </RadioGroup>
         </div>
         <div className={styles.col}>
-          <RadioGroup onChange={() => {}} label="Status"
-           error={errors.status ? true : false}
-           errorMessage={errors.status}
+          <RadioGroup
+            onChange={() => {}}
+            label="Status"
+            error={errors.status ? true : false}
+            errorMessage={errors.status}
+            value={state.status}
           >
             <Switch
               name="status"
               value={state.status}
-              // checked={state.status === "active" ? true : false}
               onChange={({ target }) => {
-                console.log(target.value, "why");
                 onChangeByNameValue(
                   "status",
-                  target.value ? "active" : "inactive"
+                  target.checked ? "active" : "inactive"
                 );
               }}
             />
@@ -194,7 +198,7 @@ export function AdditionaltDetailsForm({
         </Button>
 
         <Button type="submit" className={styles.col} isLoading={isLoading}>
-          Create New Element
+          {state.id ? "Update Element" : "Create New Element"}
         </Button>
       </div>
     </form>

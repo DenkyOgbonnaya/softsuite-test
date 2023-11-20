@@ -18,7 +18,7 @@ interface IProps extends SelectProps {
   options: SelectOption[];
   name: string;
   label?: string;
-  value: string | number;
+  value: string | number | string[];
   placeholder: string;
   errorMessage?: string;
   isRequired?: boolean;
@@ -64,7 +64,7 @@ const SelectInput: FC<IProps> = ({
       fontWeight: "500",
       zIndex: 3,
     }),
-    control: (styles) => ({
+    control: (styles, state) => ({
       ...styles,
       backgroundColor: "white",
       paddingRight: "1rem",
@@ -72,9 +72,10 @@ const SelectInput: FC<IProps> = ({
       border: !error ? "1px solid #E5E5E5" : "1px solid red",
       height: "3.5rem;",
     }),
-    valueContainer: (styles) => ({
+    valueContainer: (styles, { isDisabled }) => ({
       ...styles,
       overflow: "visible",
+      backgroundColor: isDisabled ? "#E1E1E1" : "transparent",
     }),
     option: (styles, { data, isDisabled, isFocused, isSelected }) => {
       return {
@@ -100,7 +101,7 @@ const SelectInput: FC<IProps> = ({
       };
     },
     input: (styles) => ({ ...styles, ...dot() }),
-    singleValue: (styles, { data }) => ({
+    singleValue: (styles, { data, isDisabled }) => ({
       ...styles,
       fontSize: "1rem",
       position: "relative",
@@ -110,13 +111,19 @@ const SelectInput: FC<IProps> = ({
       paddingLeft: "0.5rem",
     }),
   };
-  const [defaultValue, setDefaultValue] = useState<SelectOption | null>(null);
+  const [defaultValue, setDefaultValue] = useState<SelectOption | SelectOption[] | null>();
 
   useEffect(() => {
     const getDefultValue = () => {
-      if (value) {
-        const theValue = options?.find((option) => option.value === value);
+      if (!isMulti && value) {
+        const theValue = options.find((option) => option.value === value);
         if (theValue) setDefaultValue(theValue);
+      } else if(isMulti){
+        if(value && Array.isArray(value)){
+          const values = value.map(val => ({label:val, value:val}))
+          setDefaultValue(values)
+        }
+       
       }
     };
     getDefultValue();
@@ -157,7 +164,7 @@ const SelectInput: FC<IProps> = ({
           IndicatorSeparator: () => null,
           DropdownIndicator: () => <ChevronDown color="#818DA9" />,
         }}
-        // value={defaultValue}
+        value={defaultValue}
         onChange={handleChange}
         isMulti={isMulti}
         {...rest}
